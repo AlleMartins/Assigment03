@@ -1,0 +1,23 @@
+# === macOS ===
+.DS_Store
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.iml
+
+# === Claude AI ===
+.claude/
+
+# === Java / Gradle (exercise_1) ===
+.gradle/
+build/
+bin/
+*.class
+*.jar
+*.war
+
+# === Go (exercise_2) ===
+# Compiled binary (if built locally)
+exercise_2/exercise_2
+*.exe

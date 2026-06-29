@@ -20,14 +20,14 @@ import java.util.Set;
  * <p>
  * Demonstrates the full alarm lifecycle with a timed simulation:
  * <ol>
- *   <li>System starts DISARMED</li>
- *   <li>User arms the system (partial arming — PERIMETER + LIVING_AREA only)</li>
- *   <li>Exit delay countdown begins</li>
- *   <li>System becomes ARMED</li>
- *   <li>Motion sensor triggers in LIVING_AREA → entry delay</li>
- *   <li>Entry delay expires → ALARM</li>
- *   <li>User enters PIN to stop alarm → DISARMED</li>
- *   <li>Bonus: window sensor in SLEEPING_AREA is ignored (zone not active)</li>
+ * <li>System starts DISARMED</li>
+ * <li>User arms the system (partial arming — PERIMETER + LIVING_AREA only)</li>
+ * <li>Exit delay countdown begins</li>
+ * <li>System becomes ARMED</li>
+ * <li>Motion sensor triggers in LIVING_AREA → entry delay</li>
+ * <li>Entry delay expires → ALARM</li>
+ * <li>User enters PIN to stop alarm → DISARMED</li>
+ * <li>Bonus: window sensor in SLEEPING_AREA is ignored (zone not active)</li>
  * </ol>
  */
 public class Main {
@@ -35,9 +35,9 @@ public class Main {
     public static void main(String[] args) {
         // Short delays for demo purposes
         AlarmConfig config = new AlarmConfig(
-                Duration.ofSeconds(5),   // exit delay
-                Duration.ofSeconds(3),   // entry delay
-                "1234"                   // PIN
+                Duration.ofSeconds(5), // exit delay
+                Duration.ofSeconds(3), // entry delay
+                "1234" // PIN
         );
 
         // Set of zones to arm (partial arming — bonus feature demo)
@@ -46,8 +46,7 @@ public class Main {
         // Create the actor system with a guardian actor that sets up everything
         ActorSystem<Void> system = ActorSystem.create(
                 guardianBehavior(config, partialZones),
-                "SmartHomeAlarmSystem"
-        );
+                "SmartHomeAlarmSystem");
     }
 
     /**
@@ -62,43 +61,36 @@ public class Main {
 
             // ── Spawn the event logger actor ───────────────────────────
             ActorRef<AlarmEvent> eventLogger = context.spawn(
-                    Behaviors.setup(ctx ->
-                            new AbstractBehavior<AlarmEvent>(ctx) {
-                                @Override
-                                public Receive<AlarmEvent> createReceive() {
-                                    return newReceiveBuilder()
-                                            .onMessage(AlarmEvent.class, event -> {
-                                                getContext().getLog().info("📢 EVENT: {}", event);
-                                                return Behaviors.same();
-                                            })
-                                            .build();
-                                }
-                            }
-                    ),
-                    "event-logger"
-            );
+                    Behaviors.setup(ctx -> new AbstractBehavior<AlarmEvent>(ctx) {
+                        @Override
+                        public Receive<AlarmEvent> createReceive() {
+                            return newReceiveBuilder()
+                                    .onMessage(AlarmEvent.class, event -> {
+                                        getContext().getLog().info("📢 EVENT: {}", event);
+                                        return Behaviors.same();
+                                    })
+                                    .build();
+                        }
+                    }),
+                    "event-logger");
 
             // ── Spawn the alarm system actor ───────────────────────────
             ActorRef<AlarmCommand> alarmSystem = context.spawn(
                     AlarmSystem.createWithZones(config, partialZones, eventLogger),
-                    "alarm-system"
-            );
+                    "alarm-system");
 
             // ── Spawn sensor actors ────────────────────────────────────
             ActorRef<Sensor.Command> motionLiving = context.spawn(
                     Sensor.create(SensorType.MOTION, Zone.LIVING_AREA, alarmSystem),
-                    "sensor-motion-living"
-            );
+                    "sensor-motion-living");
 
             ActorRef<Sensor.Command> doorPerimeter = context.spawn(
                     Sensor.create(SensorType.DOOR, Zone.PERIMETER, alarmSystem),
-                    "sensor-door-perimeter"
-            );
+                    "sensor-door-perimeter");
 
             ActorRef<Sensor.Command> windowSleeping = context.spawn(
                     Sensor.create(SensorType.WINDOW, Zone.SLEEPING_AREA, alarmSystem),
-                    "sensor-window-sleeping"
-            );
+                    "sensor-window-sleeping");
 
             // ── Schedule simulation events ─────────────────────────────
             var scheduler = context.getSystem().scheduler();
@@ -110,13 +102,15 @@ public class Main {
                 alarmSystem.tell(new AlarmCommand.ArmSystemPartial("1234", partialZones));
             }, ec);
 
-            // t=3s: Try triggering a sensor in inactive zone (SLEEPING_AREA) — should be ignored
+            // t=3s: Try triggering a sensor in inactive zone (SLEEPING_AREA) — should be
+            // ignored
             scheduler.scheduleOnce(Duration.ofSeconds(3), () -> {
                 System.out.println("\n━━━ [SIM] Window sensor in SLEEPING_AREA (inactive zone) ━━━");
                 windowSleeping.tell(new Sensor.Trigger());
             }, ec);
 
-            // t=8s: Motion detected in LIVING_AREA (exit delay = 5s, so system is ARMED by now)
+            // t=8s: Motion detected in LIVING_AREA (exit delay = 5s, so system is ARMED by
+            // now)
             scheduler.scheduleOnce(Duration.ofSeconds(8), () -> {
                 System.out.println("\n━━━ [SIM] Motion detected in LIVING_AREA! ━━━");
                 motionLiving.tell(new Sensor.Trigger());
