@@ -20,7 +20,9 @@ dependencies {
     implementation 'org.apache.pekko:pekko-stream-typed_2.13:1.0.0'
     implementation 'org.apache.pekko:pekko-discovery_2.13:1.0.0'
     implementation 'org.apache.pekko:pekko-coordination_2.13:1.0.0'
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testImplementation 'org.apache.pekko:pekko-actor-testkit-typed_2.13:1.0.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

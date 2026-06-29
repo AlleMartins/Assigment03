@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="it.unibo.smarthome.alarm.AlarmSystemTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2026-06-29T14:24:35.236Z" hostname="MacBookPro.station" time="20.671">
+  <properties/>
+  <testcase name="StopAlarm with correct PIN transitions from ALARM to DISARMED" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="2.075"/>
+  <testcase name="Sensor events are ignored during EXIT_DELAY" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="1.026"/>
+  <testcase name="Sensor in active zone triggers entry delay" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="1.021"/>
+  <testcase name="ArmSystemPartial activates only specified zones" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="1.537"/>
+  <testcase name="Disarming during EXIT_DELAY cancels arming" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="2.007"/>
+  <testcase name="Arming the system transitions through EXIT_DELAY to ARMED" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="1.028"/>
+  <testcase name="Invalid PIN does not stop alarm" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="2.548"/>
+  <testcase name="Invalid PIN does not arm the system" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="0.51"/>
+  <testcase name="Disarming during ENTRY_DELAY prevents alarm" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="3.028"/>
+  <testcase name="Sensor event in ARMED state triggers ENTRY_DELAY then ALARM" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="2.037"/>
+  <testcase name="Sensor events are ignored in DISARMED state" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="0.508"/>
+  <testcase name="Sensor in inactive zone does not trigger entry delay" classname="it.unibo.smarthome.alarm.AlarmSystemTest" time="3.027"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO org.apache.pekko.event.slf4j.Slf4jLogger - Slf4jLogger started
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: DISARMED → EXIT_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - EXIT DELAY started (1 seconds) — leave the house now!
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: EXIT_DELAY → ARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Exit delay expired — system is now ARMED (active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR])
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor event: type=MOTION, zone=LIVING_AREA, triggered=true [state=ARMED]
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ARMED → ENTRY_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - ENTRY DELAY started for zone LIVING_AREA (1 seconds) — enter PIN to disarm!
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ENTRY_DELAY → ALARM
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Entry delay expired — ALARM TRIGGERED in zone LIVING_AREA
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ALARM → DISARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Alarm STOPPED — system DISARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: DISARMED → EXIT_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - EXIT DELAY started (1 seconds) — leave the house now!
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor event: type=MOTION, zone=LIVING_AREA, triggered=true [state=EXIT_DELAY]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: EXIT_DELAY → ARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Exit delay expired — system is now ARMED (active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR])
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Partial arming — active zones: [PERIMETER]
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: DISARMED → EXIT_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - EXIT DELAY started (1 seconds) — leave the house now!
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: EXIT_DELAY → ARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Exit delay expired — system is now ARMED (active zones: [PERIMETER])
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor event: type=DOOR, zone=PERIMETER, triggered=true [state=ARMED]
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ARMED → ENTRY_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - ENTRY DELAY started for zone PERIMETER (1 seconds) — enter PIN to disarm!
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Partial arming — active zones: [PERIMETER, GROUND_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: DISARMED → EXIT_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - EXIT DELAY started (1 seconds) — leave the house now!
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ENTRY_DELAY → ALARM
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Entry delay expired — ALARM TRIGGERED in zone PERIMETER
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: EXIT_DELAY → ARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Exit delay expired — system is now ARMED (active zones: [PERIMETER, GROUND_FLOOR])
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor event: type=MOTION, zone=UPPER_FLOOR, triggered=true [state=ARMED]
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor in inactive zone UPPER_FLOOR — ignored
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor event: type=DOOR, zone=PERIMETER, triggered=true [state=ARMED]
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ARMED → ENTRY_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - ENTRY DELAY started for zone PERIMETER (1 seconds) — enter PIN to disarm!
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: DISARMED → EXIT_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - EXIT DELAY started (1 seconds) — leave the house now!
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: EXIT_DELAY → DISARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - System DISARMED by user
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ENTRY_DELAY → ALARM
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Entry delay expired — ALARM TRIGGERED in zone PERIMETER
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: DISARMED → EXIT_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - EXIT DELAY started (1 seconds) — leave the house now!
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: EXIT_DELAY → ARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Exit delay expired — system is now ARMED (active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR])
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: DISARMED → EXIT_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - EXIT DELAY started (1 seconds) — leave the house now!
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: EXIT_DELAY → ARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Exit delay expired — system is now ARMED (active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR])
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor event: type=MOTION, zone=LIVING_AREA, triggered=true [state=ARMED]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ARMED → ENTRY_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - ENTRY DELAY started for zone LIVING_AREA (1 seconds) — enter PIN to disarm!
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ENTRY_DELAY → ALARM
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Entry delay expired — ALARM TRIGGERED in zone LIVING_AREA
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] WARN it.unibo.smarthome.alarm.AlarmSystem - Invalid PIN attempt: 9999
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] WARN it.unibo.smarthome.alarm.AlarmSystem - Invalid PIN attempt: 9999
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: DISARMED → EXIT_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - EXIT DELAY started (1 seconds) — leave the house now!
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: EXIT_DELAY → ARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Exit delay expired — system is now ARMED (active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR])
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor event: type=DOOR, zone=PERIMETER, triggered=true [state=ARMED]
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ARMED → ENTRY_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - ENTRY DELAY started for zone PERIMETER (1 seconds) — enter PIN to disarm!
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ENTRY_DELAY → DISARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - System DISARMED by user
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: DISARMED → EXIT_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - EXIT DELAY started (1 seconds) — leave the house now!
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: EXIT_DELAY → ARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Exit delay expired — system is now ARMED (active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR])
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor event: type=MOTION, zone=LIVING_AREA, triggered=true [state=ARMED]
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ARMED → ENTRY_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - ENTRY DELAY started for zone LIVING_AREA (1 seconds) — enter PIN to disarm!
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: ENTRY_DELAY → ALARM
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Entry delay expired — ALARM TRIGGERED in zone LIVING_AREA
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [LIVING_AREA, SLEEPING_AREA, PERIMETER, GROUND_FLOOR, UPPER_FLOOR]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor event: type=MOTION, zone=LIVING_AREA, triggered=true [state=DISARMED]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - AlarmSystem started in DISARMED state. Active zones: [PERIMETER]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Partial arming — active zones: [PERIMETER]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: DISARMED → EXIT_DELAY
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - EXIT DELAY started (1 seconds) — leave the house now!
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - State transition: EXIT_DELAY → ARMED
+[AlarmSystemTest-pekko.actor.default-dispatcher-5] INFO it.unibo.smarthome.alarm.AlarmSystem - Exit delay expired — system is now ARMED (active zones: [PERIMETER])
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor event: type=MOTION, zone=LIVING_AREA, triggered=true [state=ARMED]
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO it.unibo.smarthome.alarm.AlarmSystem - Sensor in inactive zone LIVING_AREA — ignored
+[AlarmSystemTest-pekko.actor.default-dispatcher-3] INFO org.apache.pekko.actor.CoordinatedShutdown - Running CoordinatedShutdown with reason [ActorSystemTerminateReason]
+]]></system-err>
+</testsuite>
