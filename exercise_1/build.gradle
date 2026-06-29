@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'it.unibo.smarthome'
+version = '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.pekko:pekko-actor-typed_2.13:1.0.0'
+    implementation 'org.apache.pekko:pekko-stream-typed_2.13:1.0.0'
+    implementation 'org.apache.pekko:pekko-discovery_2.13:1.0.0'
+    implementation 'org.apache.pekko:pekko-coordination_2.13:1.0.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+application {
+    mainClass = 'it.unibo.smarthome.Main'
+}
+
+test {
+    useJUnitPlatform()
+}
